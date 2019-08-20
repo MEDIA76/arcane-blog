@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700,700italic');
+
+html,
+body {
+  margin: 0rem;
+  padding: 0rem;
+}
+
+html,
+body {
+  font-family: 'Noto Serif', serif;
+  color: #333333;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+ul,
+ol,
+p {
+  margin: 0rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+h5,
+h6 {
+  font-size: 1rem;
+}
+
+h6 {
+  color: #777777;
+}
+
+hr {
+  height: 0.1rem;
+  background-color: #EEEEEE;
+  border: 0rem;
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+section {
+  width: 100%;
+  max-width: 840px;
+  margin: 0rem auto;
+  padding: 2.5rem;
+  box-sizing: border-box;
+}
+
+header,
+footer {
+  display: flex;
+  line-height: 1;
+  justify-content: space-between;
+}
+
+header {
+  margin-bottom: 4rem;
+}
+
+header > a {
+  display: inline-block;
+  margin: 0.3rem 0rem;
+  font-size: 1.4rem;
+}
+
+header > nav {
+  display: flex;
+  margin: 0rem -0.5rem;
+}
+
+header > nav > a {
+  margin: 0.5rem;
+  color: #777777;
+}
+
+header > nav svg {
+  width: auto;
+  height: 1rem;
+  fill: #333333;
+}
+
+article time {
+  color: #AAAAAA;
+}
+
+article *:first-child {
+  margin-top: 0px;
+}
+
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6,
+article hr,
+article ul,
+article ol,
+article p {
+  margin-top: 1rem;
+}
+
+article ul > *:not(li) + li,
+article ol > *:not(li) + li {
+  margin-top: 1rem;
+}
+
+article code,
+article pre {
+  background-color: #EEEEEE;
+}
+
+article code {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  vertical-align: text-bottom;
+}
+
+article pre {
+  padding: 0.8rem 1.1rem;
+}
+
+article pre code {
+  display: block;
+  padding: 0px;
+  line-height: inherit;
+  white-space: pre;
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+}
+
+article blockquote {
+  margin: 1rem 0rem 0rem;
+  padding-left: 1rem;
+  color: #888888;
+  border-left: 0.1rem solid #DDDDDD;
+}
+
+article * > a {
+  text-decoration: underline;
+}
+
+article + article {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 0.1rem solid #EEEEEE;
+}
+
+footer {
+  margin-top: 4rem;
+}
+
+footer > select {
+  margin: 0.4rem 0rem;
+  padding-right: 1rem;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.2;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 20'%3E%3Cpath d='M13.7,6.4L7.6,0.2c-0.3-0.3-0.9-0.3-1.2,0L0.3,6.4C0,6.6-0.1,7,0.1,7.3c0.1,0.3,0.5,0.5,0.8,0.5h12.2 c0.4,0,0.7-0.2,0.8-0.5C14.1,7,14,6.6,13.7,6.4L13.7,6.4z M0.3,13.6l6.1,6.1c0.3,0.3,0.9,0.3,1.2,0l6.1-6.1c0.2-0.3,0.3-0.6,0.2-1 c-0.1-0.3-0.5-0.5-0.8-0.5H0.9c-0.4,0-0.7,0.2-0.8,0.5C-0.1,13,0,13.4,0.3,13.6L0.3,13.6z' fill='%23CCCCCC'/%3E%3C/svg%3E") 100%/0.5rem no-repeat;
+  border: 0rem;
+  outline: 0rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+footer > p {
+  margin: 0.5rem 0rem;
+  color: #AAAAAA;
+}
+
+@media screen and (min-width: 1300px) {
+  html,
+  body {
+    font-size: 24px;
+  }
+
+  section {
+    max-width: 1120px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  section {
+    max-width: 680px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header,
+  footer {
+    flex-flow: column;
+    align-items: center;
+  }
+
+  header > nav {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  html,
+  body {
+    font-size: 16px;
+  }
+}
