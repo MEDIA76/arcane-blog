@@ -2,7 +2,8 @@
 
 /**
  * Languages 17.07.1 Arcane Helper
- * https://github.com/MEDIA76/arcane-helpers
+ * Copyright 2017-2019 Joshua Britt
+ * MIT https://helpers.arcane.dev
 **/
 
 return [
