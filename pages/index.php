@@ -1,6 +1,6 @@
 <?php
 
-define('ROUTE', [
+define('ROUTES', [
   ['post', array_keys($posts)]
 ]);
 
