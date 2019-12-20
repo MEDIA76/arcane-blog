@@ -20,13 +20,7 @@
       </header>
       <?= CONTENT; ?>
       <footer>
-        <select id="language">
-          <?php foreach(LOCALES as $locales) { ?>
-            <?php foreach($locales as $locale) { ?>
-              <option value="<?= $locale['URI']; ?>"<?php if($locale['URI'] == LOCALE['URI']) echo ' selected="selected"'; ?>><?= $languages[$locale['LANGUAGE']]; ?></option>
-            <?php } ?>
-          <?php } ?>
-        </select>
+        <p>Copyright &copy; <?= date('Y'); ?></p>
         <p>Built with <a href="https://arcane.dev" target="_blank">Arcane</a></p>
       </footer>
     </section>
