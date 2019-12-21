@@ -22,7 +22,7 @@ if(path(1) == 'post') {
   <?php foreach($posts as $post) { ?>
     <article>
       <time><?= date('M j, Y', $post['modified']); ?></time>
-      <?php $continue = scribe('... <a href=":reference">continue</a>', [
+      <?php $continue = scribe('...&nbsp;<a href=":reference">continue</a>', [
         ':reference' => path("/post/{$post['slug']}/")
       ]); ?>
       <?= $markdown($truncate($post['content'], 200, $continue)); ?>
