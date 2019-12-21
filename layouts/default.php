@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php if(defined('TITLE')) echo TITLE . ' - '; ?>Blog Site</title>
     <link rel="icon" type="image/png" href="<?= path('images/favicon.png'); ?>" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:700|Noto+Serif:400,400i,700,700i&display=swap" />
     <?= STYLES; ?>
   </head>
   <body>
