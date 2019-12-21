@@ -5,20 +5,27 @@ define('ROUTES', [
 ]);
 
 if(path(1) == 'post') {
-  $posts = array_filter($posts, function($post) {
-    return $post == path(2);
-  }, ARRAY_FILTER_USE_KEY);
+  $post = $posts[path(2)];
+  $title = strtok($post['content'], "\n");
+
+  relay('TITLE', strip_tags($markdown($title)));
 }
 
 ?>
 
-<?php foreach($posts as $slug => $post) { ?>
+<?php if(isset($post)) { ?>
   <article>
-      <time><?= date('M j, Y', filemtime($post)); ?></time>
-      <?php if(!path(1)) { ?>
-        <?= $markdown($truncate(file_get_contents($post), 200, '... <a href="' . path("/post/{$slug}/") . '">continue</a>')); ?>
-      <?php } else { ?>
-        <?= $markdown($post); ?>
-      <?php } ?>
+    <time><?= date('M j, Y', $post['modified']); ?></time>
+    <?= $markdown($post['content']); ?>
   </article>
+<?php } else { ?>
+  <?php foreach($posts as $post) { ?>
+    <article>
+      <time><?= date('M j, Y', $post['modified']); ?></time>
+      <?php $continue = scribe('... <a href=":reference">continue</a>', [
+        ':reference' => path("/post/{$post['slug']}/")
+      ]); ?>
+      <?= $markdown($truncate($post['content'], 200, $continue)); ?>
+    </article>
+  <?php } ?>
 <?php } ?>
