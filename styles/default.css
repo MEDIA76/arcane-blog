@@ -146,15 +146,17 @@ section > *:not(:first-child) {
 }
 
 header,
+aside,
 footer {
   display: flex;
   line-height: 1em;
+  align-items: center;
   justify-content: space-between;
 }
 
 header > a {
   display: inline-block;
-  margin: 0.3rem 0rem;
+  margin: 0.5rem 0rem;
   font-size: 1.4rem;
 }
 
@@ -205,6 +207,25 @@ article:not(:first-of-type) {
   border-top: 0.1rem solid var(--HEXE);
 }
 
+aside > *:first-child,
+aside > *:last-child {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+aside > nav {
+  display: flex;
+  margin: 0rem 1.5rem;
+  font-size: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+aside > nav * {
+  margin: 0.5rem;
+}
+
+aside span {
+  color: var(--HEXA);
 }
 
 footer > p {
@@ -225,7 +246,6 @@ footer > p {
       header,
       footer {
         flex-flow: column;
-        align-items: center;
       }
 
       header > nav {
