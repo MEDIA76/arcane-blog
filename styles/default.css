@@ -55,24 +55,20 @@ h1 {
 }
 
 h2 {
-  font-size: 1.8rem;
-}
-
-h3 {
   font-size: 1.6rem;
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 h4 {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 h5,
 h6 {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 h6 {
@@ -140,20 +136,20 @@ blockquote {
 
 section {
   width: 100%;
+  max-width: 740px;
   margin: 0rem auto;
   padding: 2.5rem;
+}
+
+section > *:not(:first-child) {
+  margin-top: 4rem;
 }
 
 header,
 footer {
   display: flex;
-  margin: 4rem 0rem;
   line-height: 1em;
   justify-content: space-between;
-}
-
-header {
-  margin-top: 0rem !important;
 }
 
 header > a {
@@ -164,7 +160,7 @@ header > a {
 
 header > nav {
   display: flex;
-  margin: 0rem -0.5rem;
+  margin-right: -0.5rem;
 }
 
 header > nav a {
@@ -209,8 +205,6 @@ article:not(:first-of-type) {
   border-top: 0.1rem solid var(--HEXE);
 }
 
-footer {
-  margin-bottom: 0rem !important;
 }
 
 footer > p {
@@ -218,35 +212,30 @@ footer > p {
   color: var(--HEXA);
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
   section {
-    max-width: 840px;
+    max-width: 640px;
   }
-
-  @media screen and (max-width: 900px) {
-    section {
-      max-width: 640px;
+  @media screen and (max-width: 700px) {
+    html {
+      font-size: 18px;
     }
-    @media screen and (max-width: 600px) {
-      html {
-        font-size: 18px;
+
+    @media screen and (max-width: 500px) {
+      header,
+      footer {
+        flex-flow: column;
+        align-items: center;
       }
 
-      @media screen and (max-width: 500px) {
-        header,
-        footer {
-          flex-flow: column;
-          align-items: center;
-        }
+      header > nav {
+        margin-top: 1rem;
+        margin-right: 0rem;
+      }
 
-        header > nav {
-          margin-top: 1rem;
-        }
-
-        @media screen and (max-width: 400px) {
-          html {
-            font-size: 16px;
-          }
+      @media screen and (max-width: 400px) {
+        html {
+          font-size: 16px;
         }
       }
     }
@@ -259,7 +248,7 @@ footer > p {
   }
 
   section {
-    max-width: 1040px;
+    max-width: 840px;
   }
 
   @media screen and (min-width: 1301px) {
@@ -268,7 +257,7 @@ footer > p {
     }
 
     section {
-      max-width: 1240px;
+      max-width: 940px;
     }
   }
 }
