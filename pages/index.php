@@ -1,14 +1,14 @@
 <?php
 
-define('ROUTES', [
-  ['post', array_keys($posts)]
-]);
-
 if(path(1) == 'post') {
+  $posts = array_column($posts, null, 'slug');
   $post = $posts[path(2)];
-  $title = strtok($post['content'], "\n");
 
-  relay('TITLE', strip_tags($markdown($title)));
+  define('ROUTES', [
+    ['post', array_keys($posts)]
+  ]);
+
+  relay('TITLE', strip_tags($markdown($post['head'])));
 }
 
 ?>
