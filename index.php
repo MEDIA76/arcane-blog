@@ -19,7 +19,7 @@ $define['DIR'] = [
 $define['SET'] = [
   'ERRORS' => false,
   'INDEX' => 'index',
-  'LAYOUT' => null,
+  'LAYOUT' => 'default',
   'LOCALE' => null,
   'MINIFY' => true
 ];
