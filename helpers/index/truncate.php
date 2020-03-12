@@ -1,10 +1,22 @@
 <?php
 
 /**
- * Truncate 19.08.1 Arcane Helper
- * Copyright 2017-2019 Joshua Britt
+ * Truncate 20.03.1 Arcane Helper
+ * Copyright 2017-2020 Joshua Britt
  * MIT https://helpers.arcane.dev
 **/
+
+if(!function_exists('mb_strlen')) {
+  function mb_strlen($str) {
+    return strlen($str);
+  }
+}
+
+if(!function_exists('mb_substr')) {
+  function mb_substr($str, $start, $length = null) {
+    return substr($str, $start, $length);
+  }
+}
 
 return function($string, $limit = 100, $suffix = '...') {
   if(mb_strlen($string) <= $limit) {
