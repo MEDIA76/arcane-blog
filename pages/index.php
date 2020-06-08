@@ -1,5 +1,7 @@
 <?php
 
+$regex = "/^[\s]*(\#{1,6})\s+(.+)$/";
+
 if(path(1) == 'post') {
   $posts = array_column($posts, null, 'slug');
   $post = $posts[path(2)];
@@ -8,7 +10,7 @@ if(path(1) == 'post') {
     ['post', array_keys($posts)]
   ]);
 
-  relay('TITLE', strip_tags($markdown($post['head'])));
+  relay('TITLE', preg_replace($regex, '$2', $post['head']));
 } else {
   $pages = $paginate($posts, 5);
   $posts = $pages[path(2) ?? 1];
@@ -29,10 +31,10 @@ if(path(1) == 'post') {
   <?php foreach($posts as $post) { ?>
     <article>
       <time><?= date('M j, Y', $post['modified']); ?></time>
-      <?php $continue = scribe('...&nbsp;<a href=":reference">continue</a>', [
-        ':reference' => path("/post/{$post['slug']}/")
+      <?php $link = path("/post/{$post['slug']}/"); ?>
+      <?= $markdown($truncate($post['content'], 200, "...&nbsp;[continue]($link)"), [
+        $post['head'] => preg_replace($regex, "$1 [$2]($link)", $post['head'])
       ]); ?>
-      <?= $markdown($truncate($post['content'], 200, $continue)); ?>
     </article>
   <?php } ?>
   <?php if(count($pages) > 1) { ?>
