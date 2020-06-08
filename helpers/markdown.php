@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Markdown 19.08.4 Arcane Helper
- * Copyright 2017-2019 Joshua Britt
+ * Markdown 20.06.1 Arcane Helper
  * MIT https://helpers.arcane.dev
 **/
 
-return function($content) {
+return function($content, $replace = []) {
   if(!is_array($content)) {
     $content = trim($content);
 
@@ -16,7 +15,17 @@ return function($content) {
       }
     }
 
+    if(!empty($replace)) {
+      $content = strtr($content, $replace);
+    }
+
     $content = explode("\n", $content);
+  } else {
+    if(!empty($replace)) {
+      $content = array_map(function($line) use($replace) {
+        return strtr($line, $replace);
+      }, $content);
+    }
   }
 
   $content = array_values(array_filter($content, 'rtrim'));
@@ -112,8 +121,8 @@ return function($content) {
         '_' => '/\_(?! )([^\_]+)(?<! )\_/',
         '~' => '/\~(?! )([^\~]+)(?<! )\~/',
         '`' => '/\`(?! )([^\`]+)(?<! )\`/',
-        '![' => '/\!\[(.*)\]\((.*)\)/',
-        '](' => '/\[(.*)\]\((.*)\)/'
+        '![' => '/\!\[(.*)\]\((.*)\)/U',
+        '](' => '/\[(.*)\]\((.*)\)/U'
       ] as $search => $regex) {
         if(strpos($line, $search) !== false) {
           if($search === '`') {
