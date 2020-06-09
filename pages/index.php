@@ -10,7 +10,9 @@ if(path(1) == 'post') {
     ['post', array_keys($posts)]
   ]);
 
-  relay('TITLE', preg_replace($regex, '$2', $post['head']));
+  if(preg_match($regex, $post['head'], $title)) {
+    relay('TITLE', $title[2]);
+  }
 } else {
   $pages = $paginate($posts, 5);
   $posts = $pages[path(2) ?? 1];
@@ -33,28 +35,30 @@ if(path(1) == 'post') {
       <time><?= date('M j, Y', $post['modified']); ?></time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
       <?= $markdown($truncate($post['content'], 200, "...&nbsp;[continue]($link)"), [
-        $post['head'] => preg_replace($regex, "$1 [$2]($link)", $post['head'])
+        $post['head'] => preg_replace($regex, "$1 [$2]($link)", $post['head'], 1)
       ]); ?>
     </article>
   <?php } ?>
   <?php if(count($pages) > 1) { ?>
+    <?php $path = path(2) ?? 1; ?>
     <aside>
-      <?php if(array_key_exists($prev = (path(2) ?? 1) - 1, $pages)) { ?>
-        <a href="<?= path($prev == 1 ? '/' : "/page/{$prev}/"); ?>">&larr;</a>
+      <?php if($pages[$prev = $path - 1] ?? false) { ?>
+        <?php $link = path($prev == 1 ? '/' : "/page/{$prev}/"); ?>
+        <a href="<?= $link; ?>">&larr;</a>
       <?php } else { ?>
         <span>&larr;</span>
       <?php } ?>
       <nav>
         <?php foreach(array_keys($pages) as $page) { ?>
-          <?php if($page == (path(2) ?? 1)) { ?>
+          <?php if($page == $path) { ?>
             <span><?= $page; ?></span>
           <?php } else { ?>
-            <?php $reference = path($page == 1 ? '/' : "/page/{$page}/"); ?>
-            <a href="<?= $reference; ?>"><?= $page; ?></a>
+            <?php $link = path($page == 1 ? '/' : "/page/{$page}/"); ?>
+            <a href="<?= $link; ?>"><?= $page; ?></a>
           <?php } ?>
         <?php } ?>
       </nav>
-      <?php if(array_key_exists($next = (path(2) ?? 1) + 1, $pages)) { ?>
+      <?php if($pages[$next = $path + 1] ?? false) { ?>
         <a href="<?= path("/page/{$next}/"); ?>">&rarr;</a>
       <?php } else { ?>
         <span>&rarr;</span>

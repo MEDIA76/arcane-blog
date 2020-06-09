@@ -210,7 +210,9 @@ article:not(:first-of-type) {
 
 aside > *:first-child,
 aside > *:last-child {
+  margin-top: -0.2em;
   font-family: 'Noto Sans', sans-serif;
+  font-size: 2rem;
 }
 
 aside > nav {
