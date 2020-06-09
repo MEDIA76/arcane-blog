@@ -27,12 +27,14 @@ if(path(1) == 'post') {
 <?php if(isset($post)) { ?>
   <article>
     <time><?= date('M j, Y', $post['modified']); ?></time>
+    <time><?= $readtime($post['content']); ?></time>
     <?= $markdown($post['content']); ?>
   </article>
 <?php } else { ?>
   <?php foreach($posts as $post) { ?>
     <article>
       <time><?= date('M j, Y', $post['modified']); ?></time>
+      <time><?= $readtime($post['content']); ?></time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
       <?= $markdown($truncate($post['content'], 200, "...&nbsp;[continue]($link)"), [
         $post['head'] => preg_replace($regex, "$1 [$2]($link)", $post['head'], 1)

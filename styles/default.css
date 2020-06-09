@@ -103,6 +103,11 @@ time {
   color: var(--HEXA);
 }
 
+time + time:before {
+  content: '\00B7';
+  margin: 0px 5px;
+}
+
 code,
 pre {
   background-color: var(--HEXE);
