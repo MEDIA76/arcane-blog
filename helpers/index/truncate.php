@@ -2,7 +2,6 @@
 
 /**
  * Truncate 20.03.1 Arcane Helper
- * Copyright 2017-2020 Joshua Britt
  * MIT https://helpers.arcane.dev
 **/
 
