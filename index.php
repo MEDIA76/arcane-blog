@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Arcane 20.01.1 Microframework
+ * Arcane 20.06.2 Microframework
  * Copyright 2017-2020 Joshua Britt
  * MIT License https://arcane.dev
 **/
@@ -19,7 +19,7 @@ $define['DIR'] = [
 $define['SET'] = [
   'ERRORS' => false,
   'INDEX' => 'index',
-  'LAYOUT' => 'default',
+  'LAYOUT' => null,
   'LOCALE' => null,
   'MINIFY' => true
 ];
@@ -36,7 +36,7 @@ function env($variable, $default = null) {
 
 function path($locator = null, $actual = false) {
   if(is_null($locator)) {
-    return str_replace('//', '/', '/' . implode(URI, '/') . '/');
+    return str_replace('//', '/', '/' . implode('/', URI) . '/');
   } else if(is_int($locator)) {
     return URI[$locator] ?? null;
   } else {
@@ -114,8 +114,10 @@ function scribe($string, $replace = []) {
     'ROOT' => substr($app['DIR'], strlen($app['ROOT']) - 1)
   ]));
 
-  if(file_exists('.env')) {
-    foreach(array_filter(array_map('trim', file('.env'))) as $env) {
+  if(file_exists('.env') || file_exists('.env.example')) {
+    $envs = file_exists('.env') ? file('.env') : file('.env.example');
+
+    foreach(array_filter(array_map('trim', $envs)) as $env) {
       if(substr($env, 0, 1) != '#') {
         putenv(str_replace(' ', '', $env));
       }
@@ -260,7 +262,7 @@ function scribe($string, $replace = []) {
   } else if(!empty(SET['LOCALE'])) {
     $request = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
     $default = str_replace('+', '-', SET['LOCALE']);
-    $uri = implode(URI, '/');
+    $uri = implode('/', URI);
 
     preg_match_all("/[a-z]{2}-[a-z]{2}/i", $request, $request);
 
