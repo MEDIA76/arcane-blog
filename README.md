@@ -1,6 +1,8 @@
 ## Arcane Blog
 
-A really simple flat-file blog that uses markdown for formatting. Perfect for personal sites or those who want to get into Arcane.
+A simple flat-file blog that uses Markdown for formatting. Perfect for personal sites or those getting started with Arcane.
+
+> #### [Preview Blog Site](https://blog.arcane.dev)
 
 ## Support
 
@@ -8,7 +10,7 @@ A really simple flat-file blog that uses markdown for formatting. Perfect for pe
 - `AllowOverride All` directive is required.
 - [Arcane Framework Repository](https://github.com/MEDIA76/arcane)
 - [Arcane Documentation & Examples](https://github.com/MEDIA76/arcane/blob/master/MANUAL.md)
-- [Collection of Useful Helpers](https://github.com/MEDIA76/arcane-helpers)
+- [Collection of Arcane Helpers](https://github.com/MEDIA76/arcane-helpers)
 
 [Creating an issue](https://github.com/MEDIA76/arcane-blog/issues) on GitHub for reporting bugs is always appreciated. Chat via [Discord channel](https://chat.arcane.dev) for additional support.
 
