@@ -24,15 +24,19 @@ if(path(1) == 'post') {
 
 <?php if(isset($post)) { ?>
   <article>
-    <time><?= date('M j, Y', $post['modified']); ?></time>
-    <time><?= $readtime($post['content']); ?></time>
+    <time>
+      <span><?= date('M j, Y', $post['modified']); ?></span>
+      <span><?= $readtime($post['content']); ?></span>
+    </time>
     <?= $markdown($post['content']); ?>
   </article>
 <?php } else { ?>
   <?php foreach($posts as $post) { ?>
     <article>
-      <time><?= date('M j, Y', $post['modified']); ?></time>
-      <time><?= $readtime($post['content']); ?></time>
+      <time>
+        <span><?= date('M j, Y', $post['modified']); ?></span>
+        <span><?= $readtime($post['content']); ?></span>
+      </time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
       <?php if(array_key_exists('title', $post)) { ?>
         <?php $regex = "/^[\s]*(\#+)\s+(.+)$/"; ?>

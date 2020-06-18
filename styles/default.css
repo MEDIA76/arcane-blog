@@ -100,10 +100,11 @@ svg {
 }
 
 time {
+  display: flex;
   color: var(--HEXA);
 }
 
-time + time:before {
+time > span:not(:first-child):before {
   content: '\00B7';
   margin: 0px 5px;
 }
