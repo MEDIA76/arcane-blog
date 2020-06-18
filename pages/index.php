@@ -55,7 +55,7 @@ if(path(1) == 'post') {
     <aside>
       <?php if($pages[$prev = $path - 1] ?? false) { ?>
         <?php $link = path($prev == 1 ? '/' : "/page/{$prev}/"); ?>
-        <a href="<?= $link; ?>">&larr;</a>
+        <?= $anchor('&larr;', $link); ?>
       <?php } else { ?>
         <span>&larr;</span>
       <?php } ?>
@@ -65,12 +65,12 @@ if(path(1) == 'post') {
             <span><?= $page; ?></span>
           <?php } else { ?>
             <?php $link = path($page == 1 ? '/' : "/page/{$page}/"); ?>
-            <a href="<?= $link; ?>"><?= $page; ?></a>
+            <?= $anchor($page, $link); ?>
           <?php } ?>
         <?php } ?>
       </nav>
       <?php if($pages[$next = $path + 1] ?? false) { ?>
-        <a href="<?= path("/page/{$next}/"); ?>">&rarr;</a>
+        <?= $anchor('&rarr;', path("/page/{$next}/")); ?>
       <?php } else { ?>
         <span>&rarr;</span>
       <?php } ?>
