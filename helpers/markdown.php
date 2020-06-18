@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Markdown 20.06.1 Arcane Helper
+ * Markdown 20.06.2 Arcane Helper
  * MIT https://helpers.arcane.dev
 **/
 
@@ -35,6 +35,8 @@ return function($content, $replace = []) {
     $linestart = ltrim($line)[0] ?? 0;
     $nextstart = ltrim($next)[0] ?? 0;
 
+    unset($format);
+
     if($linestart === '>') {
       $line = substr($line, strpos($line, '>') + 1);
 
@@ -46,11 +48,12 @@ return function($content, $replace = []) {
 
     if(ctype_space(substr($line, 0, 4))) {
       $line = htmlentities(substr($line, 4));
-      $format = "\n%s";
 
       if(!isset($code)) {
         $code = 'pre';
         $results[] = "<{$code}><code>";
+      } else {
+        $format = "\n%s";
       }
     } else {
       preg_match('/^[\s]*(\#{1,6}|\+|\-|\*)\s+(.+)$/', $line, $part);
@@ -146,7 +149,7 @@ return function($content, $replace = []) {
       }
     }
 
-    $results[] = sprintf($format, $line);
+    $results[] = sprintf($format ?? "%s", $line);
 
     if(isset($code)) {
       if(!ctype_space(substr($next, 0, 4))) {
