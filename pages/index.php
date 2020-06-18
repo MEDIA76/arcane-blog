@@ -1,7 +1,5 @@
 <?php
 
-$regex = "/^[\s]*(\#{1,6})\s+(.+)$/";
-
 if(path(1) == 'post') {
   $posts = array_column($posts, null, 'slug');
   $post = $posts[path(2)];
@@ -10,8 +8,8 @@ if(path(1) == 'post') {
     ['post', array_keys($posts)]
   ]);
 
-  if(preg_match($regex, $post['head'], $title)) {
-    relay('TITLE', $title[2]);
+  if(array_key_exists('title', $post)) {
+    relay('TITLE', trim(ltrim($post['title'], "#")));
   }
 } else {
   $pages = $paginate($posts, 5);
@@ -36,9 +34,16 @@ if(path(1) == 'post') {
       <time><?= date('M j, Y', $post['modified']); ?></time>
       <time><?= $readtime($post['content']); ?></time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
-      <?= $markdown($truncate($post['content'], 200, "...&nbsp;[continue]($link)"), [
-        $post['head'] => preg_replace($regex, "$1 [$2]($link)", $post['head'], 1)
-      ]); ?>
+      <?php if(array_key_exists('title', $post)) { ?>
+        <?php $regex = "/^[\s]*(\#+)\s+(.+)$/"; ?>
+        <?= $markdown([
+          preg_replace($regex, "$1 [$2]($link)", $post['title'])
+        ]); ?>
+      <?php } ?>
+      <p><?= implode('&nbsp;', [
+        $truncate(strip_tags($markdown($post['preview'])), 180),
+        $anchor('continue', $link)
+      ]); ?></p>
     </article>
   <?php } ?>
   <?php if(count($pages) > 1) { ?>
