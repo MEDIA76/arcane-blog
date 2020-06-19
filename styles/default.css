@@ -177,6 +177,10 @@ header > nav a {
   color: var(--HEX7);
 }
 
+header > nav a.current {
+  color: var(--HEX2);
+}
+
 header > nav svg {
   color: var(--HEX2);
 }
