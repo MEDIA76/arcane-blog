@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Markdown 20.06.3 Arcane Helper
+ * Markdown 20.06.4 Arcane Helper
  * MIT https://helpers.arcane.dev
 **/
 
@@ -120,27 +120,27 @@ return function($content, $replace = []) {
       }
 
       foreach([
-        '*' => '/\s\*(?! )([^\*]+)(?<! )\*\s/',
-        '_' => '/\s\_(?! )([^\_]+)(?<! )\_\s/',
-        '~' => '/\s\~(?! )([^\~]+)(?<! )\~\s/',
-        '`' => '/\s\`(?! )([^\`]+)(?<! )\`\s/',
-        '![' => '/\s\!\[(.*)\]\((.*)\)\s/U',
-        '](' => '/\s\[(.*)\]\((.*)\)\s/U'
+        '*' => '/(\A|\s)\*(?! )([^\*]+)(?<! )\*(\s|\z)/U',
+        '_' => '/(\A|\s)\_(?! )([^\_]+)(?<! )\_(\s|\z)/U',
+        '~' => '/(\A|\s)\~(?! )([^\~]+)(?<! )\~(\s|\z)/U',
+        '`' => '/(\A|\s)\`(?! )([^\`]+)(?<! )\`(\s|\z)/U',
+        '![' => '/(\A|\s)\!\[(.*)\]\((.*)\)(\s|\z)/U',
+        '](' => '/(\A|\s)\[(.*)\]\((.*)\)(\s|\z)/U'
       ] as $search => $regex) {
         if(strpos($line, $search) !== false) {
           if($search === '`') {
             $line = preg_replace_callback($regex, function($match) {
               $match = htmlentities($match[1]);
 
-              return str_replace('$1', $match, '<code>$1</code>');
+              return str_replace('$2', $match, '$1<code>$2</code>$3');
             }, $line);
           } else {
             $html = [
-              '*' => '<strong>$1</strong>',
-              '_' => '<em>$1</em>',
-              '~' => '<strike>$1</strike>',
-              '![' => '<img src="$2" alt="$1" />',
-              '](' => '<a href="$2">$1</a>'
+              '*' => '$1<strong>$2</strong>$3',
+              '_' => '$1<em>$2</em>$3',
+              '~' => '$1<strike>$2</strike>$3',
+              '![' => '$1<img src="$3" alt="$2" />$4',
+              '](' => '$1<a href="$3">$2</a>$4'
             ];
 
             $line = preg_replace($regex, $html[$search], $line);
