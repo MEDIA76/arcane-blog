@@ -1,7 +1,7 @@
 <?php
 
 /**
- * If 20.06.1 Arcane Helper
+ * If 20.06.2 Arcane Helper
  * MIT https://helpers.arcane.dev
 **/
 
@@ -13,9 +13,9 @@ return function($text, $reference, $attributes = []) {
           return "{$attribute}=\"{$value}\"";
         }
       }, array_keys($attributes), $attributes);
-
-      $attributes = implode("\x20", $attributes);
     }
+
+    $attributes = implode("\x20", $attributes);
   } else {
     $attributes = trim($attributes);
   }
