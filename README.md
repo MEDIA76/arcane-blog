@@ -1,8 +1,15 @@
 ## Arcane Blog
 
-A simple flat-file blog that uses Markdown for formatting. Perfect for personal sites or those getting started with Arcane.
+A simple flat-file blog that uses Markdown. Perfect for personal sites or those getting started with [Arcane](http://arcane.dev).
 
 > #### [Preview Blog Site](https://blog.arcane.dev)
+
+## Basics
+
+- Create `slug.md` files inside `/pages/posts/` to make new posts.
+- Use optional `YYYY-MM-DD-slug.md` format for forced create dates.
+
+> It's that simple.
 
 ## Support
 
