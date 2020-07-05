@@ -1,31 +1,28 @@
 <?php
 
-$posts = glob('pages/posts/*.md');
+$posts = array_map(function($post) {
+  $array['slug'] = basename($post, '.md');
 
-usort($posts, function($a, $b) {
-  return filemtime($b) - filemtime($a);
-});
+  if(strpos($array['slug'], '-', 8) == 10) {
+    $regex = "/^(\d{4}-\d{2}-\d{2})-(.+)$/";
 
-return array_filter(array_merge([0], array_map(function($post) {
-  $array['content'] = file_get_contents($post);
-  $token = strtok($array['content'], "\n");
-
-  foreach(['title', 'preview'] as $type) {
-    if($type == 'title') {
-      if(substr(ltrim($token), 0, 1) !== '#') {
-        continue;
-      }
-    } else if(array_key_exists('title', $array)) {
-      $token = strtok("\n");
+    if(preg_match($regex, $array['slug'], $basename)) {
+      $array['created'] = strtotime($basename[1]);
+      $array['slug'] = $basename[2];
     }
-
-    $array[$type] = $token;
   }
 
-  return array_merge($array, [
-    'slug' => basename($post, '.md'),
-    'modified' => filemtime($post)
-  ]);
-}, $posts)));
+  return array_merge([
+    'created' => filectime($post),
+    'modified' => filemtime($post),
+    'path' => path($post, true)
+  ], $array);
+}, glob('pages/posts/*.md'));
+
+usort($posts, function($a, $b) {
+  return $b['created'] - $a['created'];
+});
+
+return array_filter(array_merge([0], $posts));
 
 ?>

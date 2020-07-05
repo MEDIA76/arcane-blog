@@ -2,18 +2,19 @@
 
 if(path(1) == 'post') {
   $posts = array_column($posts, null, 'slug');
-  $post = $posts[path(2)];
+  $post = $content($posts[path(2)]);
 
   define('ROUTES', [
     ['post', array_keys($posts)]
   ]);
 
-  if(array_key_exists('title', $post)) {
-    relay('TITLE', trim(ltrim($post['title'], "#")));
+  if(array_key_exists('heading', $post)) {
+    relay('TITLE', trim(ltrim($post['heading'], '#')));
   }
 } else {
+  $page = path(2) ?? 1;
   $pages = $paginate($posts, 5);
-  $posts = $pages[path(2) ?? 1];
+  $posts = array_map($content, $pages[$page]);
 
   define('ROUTES', [
     ['page', range(2, count($pages))]
@@ -22,26 +23,31 @@ if(path(1) == 'post') {
 
 ?>
 
-<?php if(isset($post)) { ?>
+<?php if(path(1) == 'post') { ?>
   <article>
     <time>
-      <span><?= date('M j, Y', $post['modified']); ?></span>
+      <span><?= date('M j, Y', $post['created']); ?></span>
       <span><?= $readtime($post['content']); ?></span>
     </time>
     <?= $markdown($post['content']); ?>
+    <?php if($post['modified'] > $post['created']) { ?>
+      <time><i><?= scribe('Last updated on :date', [
+        ':date' => date('M j, Y', $post['modified'])
+      ]) ?></i></time>
+    <?php } ?>
   </article>
 <?php } else { ?>
   <?php foreach($posts as $post) { ?>
     <article>
       <time>
-        <span><?= date('M j, Y', $post['modified']); ?></span>
+        <span><?= date('M j, Y', $post['created']); ?></span>
         <span><?= $readtime($post['content']); ?></span>
       </time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
-      <?php if(array_key_exists('title', $post)) { ?>
+      <?php if(array_key_exists('heading', $post)) { ?>
         <?php $regex = "/^[\s]*(\#+)\s+(.+)$/"; ?>
         <?= $markdown([
-          preg_replace($regex, "$1 [$2]($link)", $post['title'])
+          preg_replace($regex, "$1 [$2]({$link})", $post['heading'])
         ]); ?>
       <?php } ?>
       <p><?= implode('&nbsp;', [
@@ -51,25 +57,24 @@ if(path(1) == 'post') {
     </article>
   <?php } ?>
   <?php if(count($pages) > 1) { ?>
-    <?php $path = path(2) ?? 1; ?>
     <aside>
-      <?php if($pages[$prev = $path - 1] ?? false) { ?>
-        <?php $link = path($prev == 1 ? '/' : "/page/{$prev}/"); ?>
-        <?= $anchor('&larr;', $link); ?>
+      <?php if($pages[$prev = $page - 1] ?? false) { ?>
+        <?php $link = $prev == 1 ? '/' : "/page/{$prev}/"; ?>
+        <?= $anchor('&larr;', path($link)); ?>
       <?php } else { ?>
         <span>&larr;</span>
       <?php } ?>
       <nav>
-        <?php foreach(array_keys($pages) as $page) { ?>
-          <?php if($page == $path) { ?>
-            <span><?= $page; ?></span>
+        <?php foreach(array_keys($pages) as $key) { ?>
+          <?php if($key == $page) { ?>
+            <span><?= $key; ?></span>
           <?php } else { ?>
-            <?php $link = path($page == 1 ? '/' : "/page/{$page}/"); ?>
-            <?= $anchor($page, $link); ?>
+            <?php $link = $key == 1 ? '/' : "/page/{$key}/"; ?>
+            <?= $anchor($key, path($link)); ?>
           <?php } ?>
         <?php } ?>
       </nav>
-      <?php if($pages[$next = $path + 1] ?? false) { ?>
+      <?php if($pages[$next = $page + 1] ?? false) { ?>
         <?= $anchor('&rarr;', path("/page/{$next}/")); ?>
       <?php } else { ?>
         <span>&rarr;</span>
