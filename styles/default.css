@@ -199,6 +199,7 @@ article hr,
 article ul,
 article ol,
 article p,
+article time,
 article pre {
   margin-top: 1rem;
 }

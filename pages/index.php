@@ -26,16 +26,21 @@ if(path(1) == 'post') {
 <?php if(path(1) == 'post') { ?>
   <article>
     <time>
-      <span><?= date('M j, Y', $post['modified']); ?></span>
+      <span><?= date('M j, Y', $post['created']); ?></span>
       <span><?= $readtime($post['content']); ?></span>
     </time>
     <?= $markdown($post['content']); ?>
+    <?php if($post['modified'] > $post['created']) { ?>
+      <time><i><?= scribe('Last updated on :date', [
+        ':date' => date('M j, Y', $post['modified'])
+      ]) ?></i></time>
+    <?php } ?>
   </article>
 <?php } else { ?>
   <?php foreach($posts as $post) { ?>
     <article>
       <time>
-        <span><?= date('M j, Y', $post['modified']); ?></span>
+        <span><?= date('M j, Y', $post['created']); ?></span>
         <span><?= $readtime($post['content']); ?></span>
       </time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
