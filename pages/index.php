@@ -8,8 +8,8 @@ if(path(1) == 'post') {
     ['post', array_keys($posts)]
   ]);
 
-  if(array_key_exists('title', $post)) {
-    relay('TITLE', trim(ltrim($post['title'], '#')));
+  if(array_key_exists('heading', $post)) {
+    relay('TITLE', trim(ltrim($post['heading'], '#')));
   }
 } else {
   $page = path(2) ?? 1;
@@ -44,10 +44,10 @@ if(path(1) == 'post') {
         <span><?= $readtime($post['content']); ?></span>
       </time>
       <?php $link = path("/post/{$post['slug']}/"); ?>
-      <?php if(array_key_exists('title', $post)) { ?>
+      <?php if(array_key_exists('heading', $post)) { ?>
         <?php $regex = "/^[\s]*(\#+)\s+(.+)$/"; ?>
         <?= $markdown([
-          preg_replace($regex, "$1 [$2]({$link})", $post['title'])
+          preg_replace($regex, "$1 [$2]({$link})", $post['heading'])
         ]); ?>
       <?php } ?>
       <p><?= implode('&nbsp;', [
