@@ -9,7 +9,7 @@ if(path(1) == 'post') {
   ]);
 
   if(array_key_exists('title', $post)) {
-    relay('TITLE', trim(ltrim($post['title'], "#")));
+    relay('TITLE', trim(ltrim($post['title'], '#')));
   }
 } else {
   $page = path(2) ?? 1;
@@ -42,7 +42,7 @@ if(path(1) == 'post') {
       <?php if(array_key_exists('title', $post)) { ?>
         <?php $regex = "/^[\s]*(\#+)\s+(.+)$/"; ?>
         <?= $markdown([
-          preg_replace($regex, "$1 [$2]($link)", $post['title'])
+          preg_replace($regex, "$1 [$2]({$link})", $post['title'])
         ]); ?>
       <?php } ?>
       <p><?= implode('&nbsp;', [
