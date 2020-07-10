@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Arcane Blog 20.07.1 MIT
+**/
+
 if(path(1) == 'post') {
   $posts = array_column($posts, null, 'slug');
   $post = $content($posts[path(2)]);
