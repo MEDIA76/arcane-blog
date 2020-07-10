@@ -1,6 +1,17 @@
 <?php
 
-return function($post) {
+$pages = path(['PAGES'], true);
+
+return function($post) use($pages) {
+  if(defined('LOCALE')) {
+    $path = substr($post['path'], strlen($pages));
+    $locale = path(['LOCALES', LOCALE['LANGUAGE']], true);
+
+    if(is_file($path = "{$locale}{$path}")) {
+      $post['path'] = $path;
+    }
+  }
+
   $post['content'] = file_get_contents($post['path']);
   $token = strtok($post['content'], "\n");
 
