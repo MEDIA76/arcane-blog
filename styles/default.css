@@ -185,6 +185,12 @@ header > nav svg {
   color: var(--HEX2);
 }
 
+article:not(:first-of-type) {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 0.1rem solid var(--HEXE);
+}
+
 article *:first-child {
   margin-top: 0em;
 }
@@ -213,14 +219,7 @@ article a {
   text-decoration: underline;
 }
 
-article:not(:first-of-type) {
-  margin-top: 3rem;
-  padding-top: 3rem;
-  border-top: 0.1rem solid var(--HEXE);
-}
-
-aside > *:first-child,
-aside > *:last-child {
+aside > *:not(nav) {
   margin-top: -0.2em;
   font-family: 'Noto Sans', sans-serif;
   font-size: 2rem;
@@ -230,12 +229,17 @@ aside > nav {
   display: flex;
   margin: 0rem 1.5rem;
   font-size: 1rem;
+  flex-grow: 1;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 aside > nav * {
   margin: 0.5rem;
+}
+
+aside > nav + * {
+  order: -1;
 }
 
 aside span {

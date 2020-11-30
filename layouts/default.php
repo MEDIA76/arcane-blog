@@ -14,8 +14,9 @@
         <?= $anchor('Blog Site', path('/')); ?>
         <nav>
           <?php foreach([
-            'Posts' => '/',
-            'About' => '/about/'
+            'Posts' => '/posts/',
+            'About' => '/about/',
+            'Contact' => '/contact/'
           ] as $text => $link) { ?>
             <?= $anchor($text, path($link), [
               'class' => $if(trim($link, '/') == path(1), 'current')
