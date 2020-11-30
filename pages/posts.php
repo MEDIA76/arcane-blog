@@ -10,7 +10,7 @@ if(!is_numeric($page = path(2) ?? 1)) {
 
   define('ROUTES', array_keys($posts));
 } else {
-  $pages = $paginate($entries, 1);
+  $pages = $paginate($entries, 10);
   $posts = array_map($content, $pages[$page]);
 
   define('ROUTES', array_keys($pages));
