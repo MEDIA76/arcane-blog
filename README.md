@@ -13,7 +13,7 @@ A simple flat-file blog that uses Markdown. Perfect for personal sites or those 
 
 ## Support
 
-- Requires Apache & PHP >= 8.3
+- Requires Apache & PHP >= 8.2
 - `AllowOverride All` directive is required.
 - [Arcane Framework Repository](https://github.com/MEDIA76/arcane)
 - [Arcane Documentation & Examples](https://github.com/MEDIA76/arcane/blob/master/MANUAL.md)
